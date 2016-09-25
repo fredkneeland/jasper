@@ -33,8 +33,7 @@ def handle(text, mic, profile):
 
 def _processMessage(text, context):
     print(text)
-    if "CALCULATE" is in text:
+    if "CALCULATE" in text:
         return "The result is ", calculator.get_value_for_string(text)
     
     return "Hello World ", text, " len: ", len(context)
-
