@@ -14,6 +14,9 @@ IRRELEVANT = 10
 
 # we always want is valid to return true so that we can always process the information
 def isValid(text):
+    if text is None or len(text) < 1:
+        return False
+    print(text)
     return True
 
 def handle(text, mic, profile):
