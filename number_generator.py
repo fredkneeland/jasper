@@ -25,11 +25,10 @@ def convert_text_to_int(text):
             _currentMultiple = 0
         elif word in tens:   
             _currentMultiple = tens.index(word)
-            print(_currentMultiple)
         elif word in scales:
             _multiple = math.pow(10, scales_to_value[scales.index(word)])
             _currentSmall *= _multiple
     _currentTotal += _currentSmall
     return _currentTotal
                         
-print convert_text_to_int("two trillion seven hundred forty-three billion sixteen million seven thousand four hundred thirty-six")
+# print convert_text_to_int("two trillion seven hundred forty-three billion sixteen million seven thousand four hundred thirty-six")

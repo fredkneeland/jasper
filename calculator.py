@@ -1,32 +1,50 @@
-import "number_generator"
+from number_generator import convert_text_to_int
 
 class calculator():
-    first_num
-    second_num
-    operation
+    first_num = None
+    second_num = None
+    operation = None
+    on_first_num = True
 
-    set_number(self, text):
-        if not first_num:
-            first_num = convert_text_to_int(text)
+    def set_number(self, text):
+        if self.on_first_num:
+            self.first_num = convert_text_to_int(text)
         else:
-            second_num = convert_text_to_int(text)
+            self.second_num = convert_text_to_int(text)
+        self.on_first_num = not self.on_first_num
 
-    set_operation(self, text):
-        operation = text
+    def set_operation(self, text):
+        self.operation = text
 
-    compute(self):
+    def compute(self):
         to_return = 0
-        if operation == "plus":
-            to_return = "" + (first_num + second_num)
-        elif operation == "minus":
-            to_retun = "" + (first_num - second_num)
-        elif operation == "times":
-            to_return = "" + (first_num * second_num)
-        elif operation == "divide":
-            to_return = "" + (first_num / second_num)
+        if self.operation == "plus":
+            to_return = str(self.first_num + self.second_num)
+        elif self.operation == "minus":
+            to_return = str(self.first_num - self.second_num)
+        elif self.operation == "times":
+            to_return = str(self.first_num * self.second_num)
+        elif self.operation == "divide":
+            to_return = str(self.first_num / self.second_num)
         
-        operation = ""
-        first_num = None
-        second_num = None
         return to_return
 
+    def get_value_for_string(self, text):
+        _splits = text.split("plus")
+        _operation = "plus"
+        if len(_splits) < 2:
+            _operation = "minus"
+            _splits = text.split(_operation)
+        if len(_splits) < 2:
+            _operation = "times"
+            _splits = text.split(_operation)
+        if len(_splits) < 2:
+            _operation = "divide"
+            _splits = text.split(_operation)
+        self.set_number(_splits[0])
+        self.set_operation(_operation)
+        self.set_number(_splits[1])
+        return self.compute()
+            
+calc = calculator()
+print("four plus three: ",calc.get_value_for_string("four plus three"))

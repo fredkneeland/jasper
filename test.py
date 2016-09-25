@@ -1,6 +1,10 @@
+from calculator import calculator
+
 # this is the priority by which this module will be choosen to see if it should be called
 PRIORITY = 100
 WORDS = ["CALCULATE"]
+
+calculator = calculator()
 
 # keep the context around if we can't understand the meaning of a text
 _context = []
@@ -25,5 +29,8 @@ def handle(text, mic, profile):
     mic.say(reply)
 
 def _processMessage(text, context):
+    if "calculate" is in text:
+        return calculator.get_value_for_string(text)
+    
     return "Hello World " + text + " len: " + len(context)
 
